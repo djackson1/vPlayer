@@ -1,6 +1,6 @@
 {
   "name": "vplayer",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A video player plugin for desktops/mobiles/tablets",
   "main": "index.js",
   "scripts": {
