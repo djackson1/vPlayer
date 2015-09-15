@@ -10,21 +10,21 @@
 //    }
 //}
 
-//exports = {
+exports = {
+
+	areaOfSquare: function(w,h){
+		return w*h;
+	}
+
+// /printMsg = function(){
+//	console.log("This is a message from the demo package");
+};
+
+
+//exports.printMsg = function(){
+//	console.log("This is a message from the demo package 2");
+//}
 //
-//	areaOfSquare: function(w,h){
-//		return w*h;
-//	}
-//
-//// /printMsg = function(){
-////	console.log("This is a message from the demo package");
-//};
-
-
-exports.printMsg = function(){
-	console.log("This is a message from the demo package 2");
-}
-
-exports.printMsg3 = function(){
-	console.log("Msg 3");
-}
+//exports.printMsg3 = function(){
+//	console.log("Msg 3");
+//}
