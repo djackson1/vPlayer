@@ -10,7 +10,7 @@
 //    }
 //}
 
-exports = {
+module.exports = {
 	areaOfSquare: function areaOfSquare(w,h){
 		return w*h;
 	}
