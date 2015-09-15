@@ -10,17 +10,6 @@
 //    }
 //}
 
-//exports = {
-//
-//	areaOfSquare: function(w,h){
-//		return w*h;
-//	}
-//
-//// /printMsg = function(){
-////	console.log("This is a message from the demo package");
-//};
-
-
 exports.printMsg = function(){
-	console.log("This is a message from the demo package 2");
+	console.log("This is a message from the demo package");
 }
