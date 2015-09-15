@@ -11,13 +11,9 @@
 //}
 
 exports = {
-
-	areaOfSquare: function(w,h){
+	areaOfSquare: function areaOfSquare(w,h){
 		return w*h;
 	}
-
-// /printMsg = function(){
-//	console.log("This is a message from the demo package");
 };
 
 
