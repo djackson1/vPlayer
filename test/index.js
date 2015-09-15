@@ -7,3 +7,5 @@ describe('#consoleLog', function(){
         consoleLogFunc('console message').should.equal(true);
 	});
 });
+
+//Old tests
