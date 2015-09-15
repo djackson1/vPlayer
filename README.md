@@ -22,4 +22,4 @@ A library to provide an easy to implement but customizable video player on deskt
 
 # Release History
 
-* 0.1.0 Initial release
+* 0.1.1 Initial release
