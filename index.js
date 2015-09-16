@@ -14,7 +14,8 @@ var VPlayer = (function(){
 	var vPlayer_first_open;
 	var vPlayer_is_video_loaded;
 
-	var vPlayer_initialModalSize;
+	var vPlayer_initial_modal_size;
+	var vPlayer_modal_padding;
 
 	function detectMobile(){
 		var user_agent = navigator.userAgent.toLowerCase();
@@ -51,12 +52,8 @@ var VPlayer = (function(){
 		document.getElementsByTagName('body')[0].style.overflow = 'hidden'; //Stop the body from scrolling
 
 		if( !window.is_mobile ){
-			//DESKTOP or TABLETS
 			if( !vPlayer_is_video_loaded ){
-				var debug_ratio = 1.77777;
-				var loading_gif_width = 400;
-
-				resizeModal( {width: loading_gif_width, height: loading_gif_width / debug_ratio} );
+				resizeModal( vPlayer_initial_modal_size );
 
 				if( vPlayer_first_open == false ){
 					var source = document.getElementById('vplayer-video-mobile').getElementsByTagName('source')[0];
@@ -69,7 +66,6 @@ var VPlayer = (function(){
 
 			vPlayer_video.play();
 		}else{
-			//MOBILE
 			vPlayer_video_mobile.play();
 
 			if (vPlayer_video_mobile.requestFullscreen)
@@ -84,19 +80,15 @@ var VPlayer = (function(){
 	}
 
 	function calculateDimensions(){
-		var horizontal_padding = 45;
-		var vertical_padding = 50;
-
-		//var video_ratio = vPlayer_video.videoWidth / vPlayer_video.videoHeight;
 		var window_ratio = window.innerWidth / window.innerHeight;
 
 		var size = {};
 
 		if( vPlayer_video_ratio > window_ratio ){
-			size.width = window.innerWidth - (horizontal_padding * 2);
+			size.width = window.innerWidth - (vPlayer_modal_padding.horizontal * 2);
 			size.height = size.width / vPlayer_video_ratio;
 		}else{
-			size.height = window.innerHeight - (vertical_padding * 2);
+			size.height = window.innerHeight - (vPlayer_modal_padding.vertical * 2);
 			size.width = size.height * vPlayer_video_ratio;
 		}
 
@@ -112,7 +104,6 @@ var VPlayer = (function(){
 	}
 
 	function fitModalToScreen(){
-//		var dimensions = calculateDimensions();
 		resizeModal( calculateDimensions() );
 	}
 
@@ -211,11 +202,39 @@ var VPlayer = (function(){
 			vPlayer_first_open = false;
 			vPlayer_is_video_loaded = false;
 
-			vPlayer_initialModalSize = -1;
+			vPlayer_initial_modal_size = {width: 450, height: 250};
+			vPlayer_modal_padding = {horizontal: 80, vertical: 50};
+
+			return this;
 		}
+		return null;
+	}
+
+	function setPadding(horizontal, vertical){
+		vPlayer_modal_padding.horizontal = horizontal;
+		vPlayer_modal_padding.vertical = vertical;
+		return this;
+	}
+
+	function setInitialSize(width, height){
+		vPlayer_initial_modal_size.width = width;
+		vPlayer_initial_modal_size.height = height;
+		return this;
+	}
+
+	function setTransitionTime(ms){
+		var transitionString = "width "+ms+"ms, height "+ms+"ms, left "+ms+"ms, top "+ms+"ms";
+
+		vPlayer_modal.style.transition = transitionString;
+		vPlayer_close_btn.style.transition = transitionString;
+		vPlayer_video.style.transition = transitionString;
+		return this;
 	}
 
 	return {
-		setup: setup
+		setup: setup,
+		setPadding: setPadding,
+		setInitialSize: setInitialSize,
+		setTransitionTime: setTransitionTime
 	};
 }).call(this);
