@@ -3,39 +3,50 @@
  */
 
 var VPlayer = (function(){
-	function areaOfSquare(w,h) {
-		return w*h;
-	}
+//	function areaOfSquare(w,h) {
+//		return w*h;
+//	}
+//
+//	function areaOfTriangle(b,h){
+//		return b*h*0.5;
+//	}
+//
+//	function attachTriClick(elemId){
+//		document.getElementById(elemId).addEventListener('click', function(){
+//			this.innerHTML = VPlayer.area_triangle(5,10);
+//		})
+//	}
+//
+//
+//
+//	return {
+//		area_sqare: areaOfSquare,
+//		area_triangle: areaOfTriangle,
+//		attach: attachTriClick
+//	};
 
-	function areaOfTriangle(b,h){
-		return b*h*0.5;
-	}
 
-	function attachTriClick(elemId){
-		document.getElementById(elemId).addEventListener('click', function(){
-			this.innerHTML = VPlayer.area_triangle(5,10);
-		})
-	}
 
+
+
+	function init(){
+		alert('VPlayer: init');
+	}
 
 
 	return {
-		area_sqare: areaOfSquare,
-		area_triangle: areaOfTriangle,
-		attach: attachTriClick
+		init: init
+
 	};
-
-
-
-
 }).call(this);
 
 
 
 
-document.getElementById('test-div').addEventListener('click', function(){
-	this.innerHTML = VPlayer.area(3,9);
-})
+
+
+
+
 
 
 
