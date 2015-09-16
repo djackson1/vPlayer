@@ -45,15 +45,7 @@ div#vplayer-overlay{
     position: absolute;
     display: inline-block;
 
-    width: 26px;
-    height: 26px;
 
     z-index: 100004;
     transition: width 1000ms, height 1000ms, left 1000ms, top 1000ms;
-
-    -webkit-transform: rotate(25deg);
-    -moz-transform:    rotate(25deg);
-    -ms-transform:     rotate(25deg);
-    -o-transform:      rotate(25deg);
-    transform:         rotate(25deg);
 }
