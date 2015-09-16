@@ -7,18 +7,28 @@ var VPlayer = (function(){
 		return w*h;
 	}
 
+	var AreaOfTriangle = function areaOfTriangle(b,h){
+		return b*h*0.5;
+	}
+
 
 
 	return {
-		area: AreaOfSquare
+		area_sqare: AreaOfSquare,
+		area_triangle: AreaOfTriangle
 	};
+
+
+
 
 }).call(this);
 
 
 
 
-
+document.getElementById('test-div').addEventListener('click', function(){
+	this.innerHTML = VPlayer.area(3,9);
+})
 
 
 
