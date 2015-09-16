@@ -3,19 +3,26 @@
  */
 
 var VPlayer = (function(){
-	var AreaOfSquare = function areaOfSquare(w,h) {
+	function areaOfSquare(w,h) {
 		return w*h;
 	}
 
-	var AreaOfTriangle = function areaOfTriangle(b,h){
+	function areaOfTriangle(b,h){
 		return b*h*0.5;
+	}
+
+	function attachTriClick(elemId){
+		document.getElementById(elemId).addEventListener('click', function(){
+			this.innerHTML = VPlayer.area_triangle(5,10);
+		})
 	}
 
 
 
 	return {
-		area_sqare: AreaOfSquare,
-		area_triangle: AreaOfTriangle
+		area_sqare: areaOfSquare,
+		area_triangle: areaOfTriangle,
+		attach: attachTriClick
 	};
 
 
