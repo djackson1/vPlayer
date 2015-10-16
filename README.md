@@ -26,10 +26,10 @@ this will install the vplayer to 'node_modules/vplayer'
   you can customise the vplayer by chaining extra functions
   ```
   .setTransitionTime( time_in_milliseconds )
-   .setInitialSize( initial_width, initial_height )
-   .setPadding( horizontal_padding, vertical_padding )
+  .setInitialSize( initial_width, initial_height )
+  .setPadding( horizontal_padding, vertical_padding )
 
-   VPlayer.setup().setTransitionTime(800).setInitialSize(200,100).setPadding(90,110);
+  VPlayer.setup().setTransitionTime(800).setInitialSize(200,100).setPadding(90,110);
    ```
 
 
