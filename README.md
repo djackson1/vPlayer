@@ -12,7 +12,7 @@ make sure your project has initialised npm
 
 install the vplayer module to your local project
   ```
-  npm install vplayer --save-dev
+  npm install vplayer --save
   ```
 
 this will install the vplayer to 'node_modules/vplayer'
@@ -78,4 +78,4 @@ this will install the vplayer to 'node_modules/vplayer'
 
 # Release History
 
-* 0.1.14 Updated the README to be extensive
+* 0.2.0 Following semver standards
