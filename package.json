@@ -1,8 +1,8 @@
 {
   "name": "vplayer",
-  "version": "0.1.11",
+  "version": "1.0.0",
   "description": "A video player plugin for desktops/mobiles/tablets",
-  "main": "index.js",
+  "main": "vplayer.js",
   "scripts": {
     "test": "make test"
   },
@@ -12,7 +12,12 @@
   },
   "keywords": [
     "video",
-    "player"
+    "player",
+    "video player",
+    "video modal",
+    "javascript",
+    "html video player",
+    "html5 video player"
   ],
   "author": "Daniel Jackson",
   "license": "ISC",
@@ -23,12 +28,11 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "..."
+      "url": "https://github.com/caolan/async/raw/master/LICENSE"
     }
   ],
   "devDependencies": {
     "chai": "^3.2.0",
     "mocha": "^2.3.2"
-  },
-  "dependencies": {}
+  }
 }
