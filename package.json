@@ -1,6 +1,6 @@
 {
   "name": "vplayer",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A video player plugin for desktops/mobiles/tablets",
   "main": "index.js",
   "scripts": {
@@ -11,8 +11,11 @@
     "url": "git+https://github.com/thisisbd/vPlayer.git"
   },
   "keywords": [
+    "video player",
     "video",
-    "player"
+    "player",
+    "html video player",
+    "video modal"
   ],
   "author": "Daniel Jackson",
   "license": "ISC",
@@ -29,12 +32,5 @@
   "devDependencies": {
     "chai": "^3.2.0",
     "mocha": "^2.3.2"
-  },
-  "keywords": [
-    "video player",
-    "video",
-    "player",
-    "html video player",
-    "video modal"
-  ]
+  }
 }
