@@ -17,13 +17,14 @@ install the vplayer module to your local project
 
 this will install the vplayer to 'node_modules/vplayer'
 
+
 # Usage
-  include the script tag on your page
+  include the script tag on your page (your path may vary, but it must load from node_modules...)
   ```
   <script src="node_modules/vplayer/vplayer.js"></script>
   ```
 
-  include the stylesheet for the vplayer (your path may vary, but it must load from node_modules...)
+  include the stylesheet for the vplayer (your path may vary, but it must load from node_modules as stated above)
   ```
   <link rel="stylesheet" type="text/css" href="node_modules/vplayer/style.css">
   ```
@@ -41,7 +42,6 @@ this will install the vplayer to 'node_modules/vplayer'
 
   VPlayer.setup().setTransitionTime(800).setInitialSize(200,100).setPadding(90,110);
   ```
-
 
   include the following code where you want the link to open the vplayer
   ```
@@ -64,7 +64,7 @@ this will install the vplayer to 'node_modules/vplayer'
   <!-- !vPlayer code -->
   ```
 
-  if you want to have multiple activation links on the page, you just need to add another link with the class `vplayer-poup`
+  if you want to have multiple activation links on the page, you just need to add another anchor tag with the class `vplayer-poup`
   ```
   <!-- e.g. in the navbar somewhere, as well as a link on the page -->
   <a class="vplayer-popup">
@@ -75,7 +75,6 @@ this will install the vplayer to 'node_modules/vplayer'
   this allows the vplayer to be started from multiple locations on a page
 
 
-
 # Release History
 
-* 0.2.0 Following semver standards
+* 0.2.1 Following semver standards, added an extra comment in the README referring to directory locations.
