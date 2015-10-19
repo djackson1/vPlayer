@@ -59,7 +59,7 @@ this will install the vplayer to 'node_modules/vplayer'
   </div>
 
   <video controls id="vplayer-video-mobile">
-    <source src="node_modules/vplayer/video/wham-video.mp4">
+    <source src="folder_to_video/video_path.mp4">
   </video>
   <!-- !vPlayer code -->
   ```
