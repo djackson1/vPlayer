@@ -77,4 +77,4 @@ this will install the vplayer to 'node_modules/vplayer'
 
 # Release History
 
-* 0.2.1 Following semver standards, added an extra comment in the README referring to directory locations.
+* 0.2.2 Following semver standards, added keywords to package.json
