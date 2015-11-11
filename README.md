@@ -1,80 +1,74 @@
 vPlayer
 ========
 
-A library to provide an easy to implement but customizable video player on desktops with support for fullscreen on tablets/phones
-
+A library to provide an easy-to-implement but customizable video player on desktops with support for fullscreen on tablets/phones.
 
 # Installation
-make sure your project has initialised npm
-  ```
-  npm init
-  ```
 
-install the vplayer module to your local project
-  ```
-  npm install vplayer --save
-  ```
+The library comes as an npm package:
 
-this will install the vplayer to 'node_modules/vplayer'
-
+`npm install vplayer --save`
 
 # Usage
-  include the script tag on your page (your path may vary, but it must load from node_modules...)
-  ```
-  <script src="node_modules/vplayer/vplayer.js"></script>
-  ```
 
-  include the stylesheet for the vplayer (your path may vary, but it must load from node_modules as stated above)
-  ```
-  <link rel="stylesheet" type="text/css" href="node_modules/vplayer/style.css">
-  ```
+Include the script on your page (adjusting the link path as necessary)
+  
+`<script src="node_modules/vplayer/vplayer.js"></script>`
 
-  on the page load, you must initialise the vplayer, this can be done by calling the following inside a page load event
-  ```
-  VPlayer.setup()
-  ```
+Include the vplayer stylesheet (again, exact path may vary)
+  
+`<link rel="stylesheet" href="node_modules/vplayer/style.css">`
 
-  you can customise the vplayer by chaining extra functions
-  ```
-  .setTransitionTime( time_in_milliseconds )
-  .setInitialSize( initial_width, initial_height )
-  .setPadding( horizontal_padding, vertical_padding )
+You then need to initialize vplayer on page load using the following
+  
+`VPlayer.setup()`
 
-  VPlayer.setup().setTransitionTime(800).setInitialSize(200,100).setPadding(90,110);
-  ```
+There are a few library methods you can use
 
-  include the following code where you want the link to open the vplayer
-  ```
-  <!-- vPlayer code -->
-  <a class="vplayer-popup" href="#">
-    Launch video player!
+```
+.setTransitionTime(time_in_milliseconds)
+
+.setInitialSize(initial_width, initial_height) // (px, px)
+
+.setPadding(horizontal_padding, vertical_padding) // (px, px)
+
+// Methods can also be chained like so
+VPlayer.setup().setTransitionTime(800).setInitialSize(200, 100).setPadding(90, 110);
+```
+
+Include the following markup where you want the link to open the vplayer
+  
+```
+<a class="vplayer-popup" href="#">
+  Launch video player!
+</a>
+
+<div id="vplayer-overlay">&nbsp;</div>
+
+<div id="vplayer-modal">
+  <a id="vplayer-close-btn" href="#">
+    <img id="vplayer-close-btn-img" src="node_modules/vplayer/images/close-icon.png">
   </a>
+  <video id="vplayer-video"></video>
+</div>
 
-  <div id="vplayer-overlay">&nbsp;</div>
-  <div id="vplayer-modal">
-    <a id="vplayer-close-btn" href="#">
-      <img id="vplayer-close-btn-img" src="node_modules/vplayer/images/close-icon.png">
-    </a>
-    <video id="vplayer-video"></video>
-  </div>
+<video controls id="vplayer-video-mobile">
+  <source src="folder_to_video/video_path.mp4">
+</video>
+```
 
-  <video controls id="vplayer-video-mobile">
-    <source src="folder_to_video/video_path.mp4">
-  </video>
-  <!-- !vPlayer code -->
-  ```
+If you want to have multiple vplayer activation links on a page, you just need to add another anchor tag with the class `vplayer-popup`
+  
+```
+<a class="vplayer-popup">
+  <img src="images/navbar/video_open_btn.jpg" />
+</a>
+```
+  
+# Contributing
 
-  if you want to have multiple activation links on the page, you just need to add another anchor tag with the class `vplayer-poup`
-  ```
-  <!-- e.g. in the navbar somewhere, as well as a link on the page -->
-  <a class="vplayer-popup">
-    <img src="images/navbar/video_open_btn.jpg" />
-  </a>
-  ```
+  See [issues](https://github.com/thisisbd/vPlayer/issues), general feature improvements also welcome!
+  
+# License
 
-  this allows the vplayer to be started from multiple locations on a page
-
-
-# Release History
-
-* 1.0.0 First actual release of the VPlayer
+  MIT

@@ -1,6 +1,6 @@
 {
   "name": "vplayer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A video player plugin for desktops/mobiles/tablets",
   "main": "vplayer.js",
   "scripts": {
@@ -14,23 +14,18 @@
     "video",
     "player",
     "video player",
+    "fullscreen",
     "video modal",
     "javascript",
     "html video player",
     "html5 video player"
   ],
   "author": "Daniel Jackson",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/thisisbd/vPlayer/issues"
   },
-  "homepage": "https://github.com/thisisbd/vPlayer#readme",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/caolan/async/raw/master/LICENSE"
-    }
-  ],
+  "homepage": "https://github.com/thisisbd/vPlayer",
   "devDependencies": {
     "chai": "^3.2.0",
     "mocha": "^2.3.2"
