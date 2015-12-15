@@ -17,6 +17,8 @@ var VPlayer = (function(){
 	var vPlayer_initial_modal_size;
 	var vPlayer_modal_padding;
 
+	var vPlayer_ios_9;
+
 	function detectMobile(){
 		var user_agent = navigator.userAgent.toLowerCase();
 
@@ -40,6 +42,16 @@ var VPlayer = (function(){
 			mobile = false; //desktop
 		}
 
+		vPlayer_ios_9 = false
+		if(device == 'iPhone' || device == 'iPad') {
+			var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+			var ver = [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
+
+			if (ver[0] == "9") {
+				vPlayer_ios_9 = true
+			}
+		}
+
 		window.is_mobile = mobile;
 		window.device_type = device;
 
@@ -49,7 +61,10 @@ var VPlayer = (function(){
 
 	function launchVideoPlayer(e){
 		e.preventDefault(); //Stop the anchor from moving around the page
-		document.getElementsByTagName('body')[0].style.overflow = 'hidden'; //Stop the body from scrolling
+
+		if(!vPlayer_ios_9)
+			document.getElementsByTagName('body')[0].style.overflow = 'hidden'; //Stop the body from scrolling
+
 
 		if( !window.is_mobile ){
 			if( !vPlayer_is_video_loaded ){
@@ -196,7 +211,6 @@ var VPlayer = (function(){
 				window.addEventListener( 'resize', function(){
 					fitModalToScreen();
 				});
-
 			}
 
 			vPlayer_first_open = false;
