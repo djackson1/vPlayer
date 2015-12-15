@@ -48,4 +48,5 @@
   -ms-transform:     rotate(25deg);
   -o-transform:      rotate(25deg);
   transform:         rotate(25deg);
+  background: url(images/close-icon.png) center no-repeat;
 }

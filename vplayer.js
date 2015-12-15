@@ -191,11 +191,8 @@ var VPlayer = (function(){
 				vPlayer_close_btn = document.getElementById('vplayer-close-btn');
 				vPlayer_video = document.getElementById('vplayer-video');
 
-				var vPlayer_close_btn_img = vPlayer_close_btn.getElementsByTagName('img')[0];
-
-				vPlayer_close_btn_width_half = vPlayer_close_btn_img.naturalWidth / 2;
-				vPlayer_close_btn_height_half = vPlayer_close_btn_img.naturalHeight / 2;
-
+				vPlayer_close_btn_width_half = 13;
+				vPlayer_close_btn_height_half = 13;
 
 				vPlayer_video.addEventListener( 'loadedmetadata', function(){
 					loadedMetaData();

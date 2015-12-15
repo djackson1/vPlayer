@@ -46,9 +46,7 @@ Include the following markup where you want the link to open the vplayer
 <div id="vplayer-overlay">&nbsp;</div>
 
 <div id="vplayer-modal">
-  <a id="vplayer-close-btn" href="#">
-    <img id="vplayer-close-btn-img" src="node_modules/vplayer/images/close-icon.png">
-  </a>
+  <a id="vplayer-close-btn" href="#"></a>
   <video id="vplayer-video"></video>
 </div>
 
