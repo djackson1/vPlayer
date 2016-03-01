@@ -1,15 +1,14 @@
-vPlayer
-========
+# vPlayer
 
 A library to provide an easy-to-implement but customizable video player on desktops with support for fullscreen on tablets/phones.
 
-# Installation
+### Installation
 
 The library comes as an npm package:
 
 `npm install vplayer --save`
 
-# Usage
+### Including the correct files
 
 Include the script on your page (adjusting the link path as necessary)
   
@@ -19,25 +18,12 @@ Include the vplayer stylesheet (again, exact path may vary)
   
 `<link rel="stylesheet" href="node_modules/vplayer/style.css">`
 
-You then need to initialize vplayer on page load using the following
-  
-`VPlayer.setup()`
+### Ways of using vPlayer
 
-There are a few library methods you can use
+#### One video on a page
 
-```
-.setTransitionTime(time_in_milliseconds)
+Include the following html on your page
 
-.setInitialSize(initial_width, initial_height) // (px, px)
-
-.setPadding(horizontal_padding, vertical_padding) // (px, px)
-
-// Methods can also be chained like so
-VPlayer.setup().setTransitionTime(800).setInitialSize(200, 100).setPadding(90, 110);
-```
-
-Include the following markup where you want the link to open the vplayer
-  
 ```
 <a class="vplayer-popup" href="#">
   Launch video player!
@@ -59,9 +45,65 @@ If you want to have multiple vplayer activation links on a page, you just need t
   
 ```
 <a class="vplayer-popup">
-  <img src="images/navbar/video_open_btn.jpg" />
+  Open the video
 </a>
 ```
+
+You then need to initialize vplayer on page load using the following
+  
+`VPlayer.setup()` 
+or 
+`VPlayer.setup(false)`
+
+The parameter to the setup method is whether there are multiple videos
+
+#### Multiple videos on a page
+
+```
+<a class="vplayer-popup" data-video-link="video-1.mp4" href="#">
+  Launch video player!
+</a>
+
+<div id="vplayer-overlay">&nbsp;</div>
+
+<div id="vplayer-modal">
+  <a id="vplayer-close-btn" href="#"></a>
+  <video id="vplayer-video"></video>
+</div>
+
+<video controls id="vplayer-video-mobile">
+</video>
+
+<a class="vplayer-popup" data-video-link="video-2.mp4" href="#">
+  Launch video 2
+</a>
+```
+
+In your <a> tags put the link of the video which that link should open in the `data-video-link` attribute
+`<a class="vplayer-popup" data-video-link="link-to-video.mp4" href="#">Play video</a>`
+
+You then need to initialize vplayer on page load using the following
+
+`VPlayer.setup(true)` 
+
+### Customizability
+
+There are some methods which can customize VPlayer
+
+```
+// how long for the modal to take to increase
+.setTransitionTime(time_in_milliseconds)
+
+// the initial width and height of the modal
+.setInitialSize(initial_width, initial_height) // (px, px)
+
+// how much side padding so that the VPlayer doesn't sit right on the edge of the screen
+.setPadding(horizontal_padding, vertical_padding) // (px, px)
+
+// Methods can also be chained like so
+VPlayer.setup().setTransitionTime(800).setInitialSize(200, 150).setPadding(30, 40);
+```
+
   
 # Contributing
 
