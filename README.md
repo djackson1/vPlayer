@@ -1,5 +1,7 @@
 # vPlayer
 
+[![npm](https://img.shields.io/npm/v/vplayer.svg)](https://www.npmjs.com/package/vplayer)
+
 A library to provide an easy-to-implement but customizable video player on desktops with support for fullscreen on tablets/phones.
 
 ### Installation
