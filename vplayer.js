@@ -19,6 +19,8 @@ var VPlayer = (function(){
 
 	var vPlayer_ios_9;
 
+	var multiple_videos;
+
 	function detectMobile(){
 		var user_agent = navigator.userAgent.toLowerCase();
 
@@ -58,39 +60,81 @@ var VPlayer = (function(){
 		return mobile;
 	}
 
+	function playMobileVideo(){
+		vPlayer_video_mobile.play();
+
+		// try to request the video to be fullscreen
+		if (vPlayer_video_mobile.requestFullscreen)
+			vPlayer_video_mobile.requestFullscreen();
+		else if (vPlayer_video_mobile.webkitRequestFullscreen)
+			vPlayer_video_mobile.webkitRequestFullscreen();
+		else if (vPlayer_video_mobile.mozRequestFullScreen)
+			vPlayer_video_mobile.mozRequestFullScreen();
+		else if (vPlayer_video_mobile.msRequestFullscreen)
+			vPlayer_video_mobile.msRequestFullscreen();
+	}
 
 	function launchVideoPlayer(e){
 		e.preventDefault(); //Stop the anchor from moving around the page
 
-		if(!vPlayer_ios_9)
-			document.getElementsByTagName('body')[0].style.overflow = 'hidden'; //Stop the body from scrolling
+		if(!multiple_videos) {
+			if (!vPlayer_ios_9) // ios 9 bugs out by stopping movement on the body...
+				document.getElementsByTagName('body')[0].style.overflow = 'hidden'; //Stop the body from scrolling
 
 
-		if( !window.is_mobile ){
-			if( !vPlayer_is_video_loaded ){
-				resizeModal( vPlayer_initial_modal_size );
+			if (!window.is_mobile) {
+				// desktop
+				showModal()
 
-				if( vPlayer_first_open == false ){
-					var source = document.getElementById('vplayer-video-mobile').getElementsByTagName('source')[0];
-					vPlayer_video.appendChild(source);
-					vPlayer_first_open = true;
+				if (!vPlayer_is_video_loaded) {
+					if (vPlayer_first_open == false) {
+						var source = document.getElementById('vplayer-video-mobile').getElementsByTagName('source')[0];
+						vPlayer_video.appendChild(source);
+						vPlayer_video.load()
+						vPlayer_first_open = true;
+					}
+				}else {
+					//
+					setTimeout(function(){
+						fitModalToScreen()
+					}, 1)
 				}
+
+
+			} else {
+				playMobileVideo()
 			}
-			vPlayer_overlay.style.display = 'block';
-			vPlayer_modal.style.display = 'block';
-
-			vPlayer_video.play();
 		}else{
-			vPlayer_video_mobile.play();
+			var video_link = this.dataset.videoLink;
 
-			if (vPlayer_video_mobile.requestFullscreen)
-				vPlayer_video_mobile.requestFullscreen();
-			else if (vPlayer_video_mobile.webkitRequestFullscreen)
-				vPlayer_video_mobile.webkitRequestFullscreen();
-			else if (vPlayer_video_mobile.mozRequestFullScreen)
-				vPlayer_video_mobile.mozRequestFullScreen();
-			else if (vPlayer_video_mobile.msRequestFullscreen)
-				vPlayer_video_mobile.msRequestFullscreen();
+			if(video_link === undefined){
+				return; //no video link
+			}
+
+			if(window.is_mobile){
+				vPlayer_video_mobile.children[0].src = video_link;
+				vPlayer_video_mobile.load();
+
+				playMobileVideo()
+			}else{
+				//desktop
+
+				var source = document.getElementById('vplayer-video').getElementsByTagName('source')[0];
+				if(source === undefined){
+					// add source tag
+					var new_src_tag = document.createElement('source')
+					new_src_tag.src = video_link;
+					vPlayer_video.appendChild(new_src_tag)
+				}else{
+					// change the source src tag
+					source.src = video_link
+					vPlayer_video.load()
+				}
+
+				//launch modal now
+				showModal()
+
+			}
 		}
 	}
 
@@ -141,6 +185,13 @@ var VPlayer = (function(){
 		}
 	}
 
+	function showModal(){
+		vPlayer_overlay.style.display = 'block';
+		vPlayer_modal.style.display = 'block';
+		resizeModal(vPlayer_initial_modal_size);
+		vPlayer_video.play()
+	}
+
 	function resizeModal(dimensions){
 		var w = parseInt(dimensions.width);
 		var h = parseInt(dimensions.height);
@@ -160,11 +211,49 @@ var VPlayer = (function(){
 		vPlayer_video.height = h + 'px';
 	}
 
+	function desktopSetup(){
+		vPlayer_overlay = document.getElementById('vplayer-overlay');
+		vPlayer_modal = document.getElementById('vplayer-modal');
+		vPlayer_close_btn = document.getElementById('vplayer-close-btn');
+		vPlayer_video = document.getElementById('vplayer-video');
 
+		vPlayer_close_btn_width_half = 13;
+		vPlayer_close_btn_height_half = 13;
 
-	function setup(){
+		vPlayer_video.addEventListener( 'loadedmetadata', function(){
+			loadedMetaData();
+		}, false);
+
+		var closing_modal_elements = [vPlayer_close_btn, vPlayer_overlay];
+		for( var close_element in [vPlayer_close_btn, vPlayer_overlay] ){
+			closing_modal_elements[close_element].addEventListener( 'click', function(){
+				closeVideoModal();
+			});
+		}
+
+		window.addEventListener( 'resize', function(){
+			fitModalToScreen();
+		});
+	}
+
+	function mobileSetup(){
+		vPlayer_video_mobile = document.getElementById('vplayer-video-mobile');
+
+		var listeners = ['webkitfullscreenchange', 'mozfullscreenchange', 'fullscreenchange', 'webkitendfullscreen'];
+
+		for( var listener in listeners ){
+			vPlayer_video_mobile.addEventListener( listeners[listener], function(e){
+				// chrome safari firefox IE ios end fullscreen
+				exitFullscreenMobile();
+			});
+		}
+	}
+
+	function setup(many_videos){
 		// Setup hooks to fire events when the a tag is pressed
 		var vplayer_hooks = document.querySelectorAll('a.vplayer-popup');
+
+		multiple_videos = many_videos || false
 
 		if( vplayer_hooks.length > 0 ){
 			for( var i = 0; i < vplayer_hooks.length; i++ ){
@@ -173,41 +262,9 @@ var VPlayer = (function(){
 
 
 			if( detectMobile() ){
-				vPlayer_video_mobile = document.getElementById('vplayer-video-mobile');
-
-				var listeners = ['webkitfullscreenchange', 'mozfullscreenchange', 'fullscreenchange', 'webkitendfullscreen'];
-
-				for(listener in listeners ){
-					vPlayer_video_mobile.addEventListener( listeners[listener], function(e){
-						// chrome safari firefox IE ios end fullscreen
-						exitFullscreenMobile();
-					});
-				}
-
-
+				mobileSetup()
 			}else{
-				vPlayer_overlay = document.getElementById('vplayer-overlay');
-				vPlayer_modal = document.getElementById('vplayer-modal');
-				vPlayer_close_btn = document.getElementById('vplayer-close-btn');
-				vPlayer_video = document.getElementById('vplayer-video');
-
-				vPlayer_close_btn_width_half = 13;
-				vPlayer_close_btn_height_half = 13;
-
-				vPlayer_video.addEventListener( 'loadedmetadata', function(){
-					loadedMetaData();
-				}, false);
-
-				var closing_modal_elements = [vPlayer_close_btn, vPlayer_overlay];
-				for( close_element in [vPlayer_close_btn, vPlayer_overlay] ){
-					closing_modal_elements[close_element].addEventListener( 'click', function(){
-						closeVideoModal();
-					});
-				}
-
-				window.addEventListener( 'resize', function(){
-					fitModalToScreen();
-				});
+				desktopSetup()
 			}
 
 			vPlayer_first_open = false;
@@ -246,6 +303,10 @@ var VPlayer = (function(){
 		setup: setup,
 		setPadding: setPadding,
 		setInitialSize: setInitialSize,
-		setTransitionTime: setTransitionTime
+		setTransitionTime: setTransitionTime,
+
+		fit: fitModalToScreen
 	};
 }).call(this);
+
+window.vplayer = VPlayer;
