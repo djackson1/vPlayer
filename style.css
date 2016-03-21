@@ -35,6 +35,14 @@
   display: none;
 }
 
+#vplayer-video-description {
+  display: block;
+  color: #ccc;
+  background-color: rgba(0,0,0,0.8);
+  padding: 5px 12px;
+  font-size: 12px;
+}
+
 
 #vplayer-close-btn{
   position: absolute;

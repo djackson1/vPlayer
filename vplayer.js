@@ -1,9 +1,3 @@
-/**
- * Created by djackson on 15/09/15.
- *
- * An NPM module for creating an easy to use and implement web video player modal for desktops and tablets (and fullscreen functionality for mobiles)
- */
-
 var VPlayer = (function(){
 	var vPlayer_overlay;
 	var vPlayer_modal;
@@ -77,6 +71,8 @@ var VPlayer = (function(){
 	function launchVideoPlayer(e){
 		e.preventDefault(); //Stop the anchor from moving around the page
 
+		document.getElementById('vplayer-video-description').style.display = "none";
+
 		if(!multiple_videos) {
 			if (!vPlayer_ios_9) // ios 9 bugs out by stopping movement on the body...
 				document.getElementsByTagName('body')[0].style.overflow = 'hidden'; //Stop the body from scrolling
@@ -118,17 +114,24 @@ var VPlayer = (function(){
 				playMobileVideo()
 			}else{
 				//desktop
+				var videoDescription = this.dataset.videoDescription;
 
 				var source = document.getElementById('vplayer-video').getElementsByTagName('source')[0];
 				if(source === undefined){
 					// add source tag
-					var new_src_tag = document.createElement('source')
+					var new_src_tag = document.createElement('source');
 					new_src_tag.src = video_link;
 					vPlayer_video.appendChild(new_src_tag)
 				}else{
 					// change the source src tag
-					source.src = video_link
+					source.src = video_link;
 					vPlayer_video.load()
+				}
+
+				if(videoDescription !== undefined && videoDescription.length > 0) {
+					var descriptionBlock = document.getElementById('vplayer-video-description')
+					descriptionBlock.innerHTML = videoDescription;
+					descriptionBlock.style.display = "block";
 				}
 
 				//launch modal now
@@ -166,7 +169,7 @@ var VPlayer = (function(){
 		resizeModal( calculateDimensions() );
 	}
 
-	function closeVideoModal(){
+	function closeVideoModal(e){
 		document.getElementsByTagName('body')[0].style.overflow = 'scroll';
 
 		vPlayer_overlay.style.display = 'none';
@@ -226,7 +229,8 @@ var VPlayer = (function(){
 
 		var closing_modal_elements = [vPlayer_close_btn, vPlayer_overlay];
 		for( var close_element in [vPlayer_close_btn, vPlayer_overlay] ){
-			closing_modal_elements[close_element].addEventListener( 'click', function(){
+			closing_modal_elements[close_element].addEventListener( 'click', function(e){
+				e.preventDefault();
 				closeVideoModal();
 			});
 		}

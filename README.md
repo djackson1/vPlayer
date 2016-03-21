@@ -36,6 +36,7 @@ Include the following html on your page
 <div id="vplayer-modal">
   <a id="vplayer-close-btn" href="#"></a>
   <video id="vplayer-video"></video>
+  <div id="vplayer-video-description">&nbsp;</div>
 </div>
 
 <video controls id="vplayer-video-mobile">
@@ -86,7 +87,31 @@ In your <a> tags put the link of the video which that link should open in the `d
 
 You then need to initialize vplayer on page load using the following
 
-`VPlayer.setup(true)` 
+`VPlayer.setup(true)`
+
+#### Video Desctiptions Below Video
+
+```
+<a class="vplayer-popup" data-video-link="video-1.mp4" data-video-description="A small description to appear below the video" href="#">
+  Launch video player!
+</a>
+
+<div id="vplayer-overlay">&nbsp;</div>
+
+<div id="vplayer-modal">
+  <a id="vplayer-close-btn" href="#"></a>
+  <video id="vplayer-video"></video>
+</div>
+
+<video controls id="vplayer-video-mobile">
+</video>
+
+<a class="vplayer-popup" data-video-link="video-2.mp4" data-video-description="A second small description" href="#">
+  Launch video 2
+</a>
+```
+
+By adding the `data-video-description` attribute to your vPlayer a tags will include a small description below the video. These tags are optional and can be used on some, all or none of your videos.
 
 ### Customizability
 
